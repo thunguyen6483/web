@@ -1,7 +1,13 @@
 import requests
-import json
 import streamlit as st
+from streamlit_lottie import st_lottie
 st.set_page_config(page_title="web của tôi" , page_icon=":tada:",layout="wide")
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+lottie_coding = load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_o6spyjnc.json")
 hide_st_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -32,6 +38,8 @@ with st.container():
          - đang làm việc với Excel và tự nhận thấy rằng - "phải có một cách tốt hơn." """ 
          )
          st.write("[learn more>](https://www.youtube.com/channel/UC3opf8J6aPKbP4EZj892rwQ)")
+    with right_column:
+            st_lottie(lottie_coding, height = 300 )
 with st.container():
     st.write("---")
     st.header("liên lạc với tôi")
